@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+            <title>Main Page</title>
+        <meta name="viewport" content="width=device-width; height=device-height; user-scalable=no" />
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		
+		<!--reference to Google API -->
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOCI9OFT-9fTdupyzDuTW1zmn54-xF5d0&sensor=false"></script>
+		
+		<!-- Reference to JQuery -->
+		<script src="js/jquery-1.11.0.min.js"></script>
+		
+		<!--Reference to JQuery Mobile -->
+		    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a1/jquery.mobile-1.0a1.min.css" />
+			<script src="http://code.jquery.com/jquery-1.4.3.min.js"></script>
+			<script src="http://code.jquery.com/mobile/1.0a1/jquery.mobile-1.0a1.min.js"></script>
+			
+		<!--Reference to Cordova (Phonegap -->
+		<script src="cordova.js"></script>
+		
+        <!--Extra css (in addition to css from JQuery Mobile)-->
+		<style type="text/css">
+			#myform{padding-left:8px; padding-right:8px;}
+			 div.displayelem{padding:15px;}
+			#thehead{padding-bottom:8px}
+			#pic{padding-left:15px}
+		</style>
+	 <!--
+		<script type="text/javascript">
+		
+			// Wait for Cordova to load 
+			document.addEventListener("deviceready", onDeviceReady, false);
+		
+		</script>
+	 -->
+         <!--Reference to save.js-->
+		<script src="js/save.js"></script>
+	 
+			<!--Reference to map.js-->
+		<script src="js/map.js"></script>
+	 
+		<!--Reference to form.js-->
+		<script src="js/form.js"></script> 
+	 
+    </head>
+    <body>
+	
+		<div data-role="page" id="main">
+		
+			<div data-role="header" data-nobackbtn="true">Find My Car
+			</div>
+			
+			<img id="pic" src="img/car.jpg" alt="Car Picture" />
+			
+			<div data-role="button" onclick="saveLocation();">Save Car Location</div>
+			
+			<p><a href="#form" data-role="button" id="garfom" onclick="clearForm();" data-icon="arrow-r" data-iconpos="right">Enter Notes</a></p>
+			
+			<p><a href="#show" data-role="button" onclick="showLocation();" data-transition="none" data-icon="arrow-r" data-iconpos="right">Map</a>
+			</p>
+			
+			<p><a href="#savedParkingGarageInfo" data-role="button" id="garSaved" onclick="retrieveFormInfo();" data-icon="arrow-r" data-iconpos="right">Display Notes</a>
+			</p>
+		
+		</div>
+		
+		<div data-role="page" id="show" class="page-map">
+			
+				<div data-role="header" id="thehead" data-nobackbtn="true">
+					<h1>Find My Car</h1>
+				
+					<div id="directions" onclick="calcRoute();" id="routebutton" data-inline="true" data-role="button">Route</div>
+					<a href="#text" data-role="button" id="textdir" onclick="textDirections();" data-transition="none" data-inline="true" data-icon="arrow-r" data-iconpos="right">Directions</a>
+				
+				</div>
+			
+			<div data-role="content" id="the_map_container" style="padding:0">
+				
+				
+				<div id="map_canvas" style="width:100%; height:100%;">
+				</div>
+			</div>
+
+		</div>
+		
+		
+		<div data-role="page" id="text">
+			<div data-role="header" data-nobackbtn="true"><h1>Find My Car</h1></div>
+			<div data-role="content" style="width:100%; height:100%; padding:0;"> 
+				<div id="directions_panel" style="width:100%; height:100%;"></div>
+			</div>
+		</div>
+
+
+		<div data-role="page" id="form">
+            <div data-role="header" data-nobackbtn="true">Find My Car
+                <a href="#main" data-role="button" id="save-activity-button" onclick="processForm();" data-icon="check" data-theme="b" data-rel="back" class="ui-btn-right">Save</a>
+            </div>
+            <div data-role="content" style="width:100%; height:100%; padding:0;"> 
+                <form name="myform" id="myform" action="" method="get">
+                    <div data-role="fieldcontain">
+                            <label for="name">Level:</label>
+                            <input type="text" id="level" name="level" id="theLevel" value=""  />
+                            <label for="name">Parking Spot Number:</label>
+                            <input type="text" name="spot" id="theParkingSpot" value=""  />
+                            <label for="textarea">Notes:</label>
+                        <textarea cols="10" rows="5" name="notes" id="theNotes"></textarea>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+		<div data-role="page" id="savedParkingGarageInfo">
+			<div data-role="header" data-nobackbtn="true"><h1>Find My Car</h1></div>
+			<div data-role="content" style="width:100%; height:100%; padding:0;" > 
+				<div class="displayelem" id="level2"></div>
+				<div class="displayelem" id="spot"></div>
+				<div class="displayelem" id="notes"></div>
+			</div>
+		</div>
+	
+    </body>
+</html>
